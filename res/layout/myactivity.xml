@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+<TextView 
+    android:id="@+id/title"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:textSize="40sp"
+    android:gravity="center"
+    android:background="#9e9e9e"
+    android:text="全国"/>
+<ExpandableListView 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/listview"
+    android:background="#88004433"
+    />
+
+</LinearLayout>
