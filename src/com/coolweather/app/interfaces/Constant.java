@@ -5,4 +5,5 @@ public interface Constant {
 	String TABLE_PROVINCE = "Province";
 	String TABLE_CITY = "City";
 	String httpUrl = "http://apis.baidu.com/apistore/weatherservice/citylist";//地址
+	String httpUrlWeather = "http://apis.baidu.com/apistore/weatherservice/cityname";
 }					

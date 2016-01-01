@@ -7,8 +7,11 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import android.util.Log;
+
 import com.coolweather.app.db.dao.DatabaseDao;
 import com.coolweather.app.interfaces.Constant;
+import com.coolweather.app.model.City;
 
 public class GetCityUtil {
 
@@ -27,6 +30,7 @@ public class GetCityUtil {
 		// 先从数据库查询
 		queryDatabase(province_cn);
 		if (cityList.isEmpty()) {
+			LogUtils.d("database", "从网络获取");
 			// 从网络查询
 			queryNet(province_cn);
 			// 保存到数据库
@@ -41,8 +45,11 @@ public class GetCityUtil {
 	 * 查询网络数据
 	 */
 	private static void queryNet(String province_cn) {
+		List<City> list = new ArrayList<City>();
+		
 		String json = HttpUtil.httpGet(Constant.httpUrl, "cityname="
 				+ URLEncoder.encode(province_cn));
+		
 		try {
 		// Gson gson = new Gson();
 		// gson.fromJson(json, City.class);
@@ -64,10 +71,14 @@ public class GetCityUtil {
 				String name_cn = cityInfo.getString("name_cn");
 				String name_en = cityInfo.getString("name_en");
 				String province_cn1 = cityInfo.getString("province_cn");
-				
 				cityList.add(name_cn);
 				LogUtils.d("cityList", cityList.get(i));
+				//添加城市到集合，用于存储到数据库
+				list.add(new City(province_cn1, district_cn, area_id, name_cn, name_en));
 			}
+			//添加到数据库
+			DatabaseDao dao = DatabaseDao.getDatabaseDao();
+			dao.addCityData(list);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -80,6 +91,9 @@ public class GetCityUtil {
 	private static void queryDatabase(String province_cn) {
 		DatabaseDao dao = DatabaseDao.getDatabaseDao();
 		cityList = dao.queryCity(province_cn);
-		LogUtils.d("database", cityList.size() + "");
+		for (String city : cityList) {
+			LogUtils.d("database", city);
+			
+		}
 	}
 }

@@ -12,6 +12,7 @@ import com.coolweather.app.db.DatabaseHelper;
 import com.coolweather.app.interfaces.Constant;
 import com.coolweather.app.model.City;
 import com.coolweather.app.model.Province;
+import com.coolweather.app.util.LogUtils;
 
 
 /**
@@ -59,13 +60,15 @@ public class DatabaseDao {
 		ContentValues values = new ContentValues();
 		//将所有城市数据添加进去
 		for(City city:datas){
-			values.put("Province_cn", city.getProvince_cn());
+			values.put("province_cn", city.getProvince_cn());
 			values.put("district_cn", city.getDistrict_cn());
-			values.put("City_id", city.getCity_id());
-			values.put("City_name_cn", city.getCity_name_cn());
-			values.put("City_name_en", city.getCity_name_en());
-			db.insert(Constant.TABLE_PROVINCE, null, values);
+			values.put("city_id", city.getCity_id());
+			values.put("city_name_cn", city.getCity_name_cn());
+			values.put("city_name_en", city.getCity_name_en());
+			db.insert(Constant.TABLE_CITY, null, values);
+			LogUtils.d("database", "添加----"+city.getCity_name_cn()+"----到数据库成功");
 		}
+		LogUtils.d("database", "添加完成");
 		db.close();
 	}
 	
@@ -96,7 +99,7 @@ public class DatabaseDao {
 		Cursor cursor = db.rawQuery("select city_name_cn from City where province_cn=? ", new String[]{province_name});
 		List<String> list = new ArrayList<String>();
 		while(cursor.moveToNext()){
-			String cityName = cursor.getColumnName(cursor.getColumnIndex("city_name_cn"));
+			String cityName = cursor.getString(cursor.getColumnIndex("city_name_cn"));
 			list.add(cityName);
 		}
 		db.close();

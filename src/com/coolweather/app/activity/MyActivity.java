@@ -5,9 +5,11 @@ import java.util.List;
 import java.util.Map;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
@@ -18,8 +20,11 @@ import android.widget.Toast;
 
 import com.coolweather.app.R;
 import com.coolweather.app.db.dao.DatabaseDao;
+import com.coolweather.app.model.WeatherInfo;
 import com.coolweather.app.util.GetCityUtil;
+import com.coolweather.app.util.GetWeatherUtil;
 import com.coolweather.app.util.GlobalUtil;
+import com.coolweather.app.util.LogUtils;
 
 public class MyActivity extends Activity {
 
@@ -35,6 +40,7 @@ public class MyActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.myactivity);
 		initView();// 初始化
 	}
@@ -89,9 +95,24 @@ public class MyActivity extends Activity {
 			@Override
 			public boolean onChildClick(ExpandableListView parent, View v,
 					int groupPosition, int childPosition, long id) {
-				String cityname = mAllCityMap.get(mProvinceList.get(groupPosition)).get(childPosition);
+				final String cityname = mAllCityMap.get(mProvinceList.get(groupPosition)).get(childPosition);
 				Toast.makeText(GlobalUtil.getContext(),cityname, 0).show();
 				mTitle.setText(cityname);
+				
+				//网络加载天气数据，耗时操作，开启子线程
+				new Thread(new Runnable() {
+					
+					@Override
+					public void run() {
+						WeatherInfo weatherInfo = GetWeatherUtil.requestCityWeather(cityname);
+						LogUtils.d("myweather", weatherInfo.toString());
+						Intent intent = new Intent(MyActivity.this,WeatherActivity.class);
+						intent.putExtra("WEATHER", weatherInfo);
+						startActivity(intent);
+					}
+				}).start();
+				
+				
 				return true;
 			}
 		});
