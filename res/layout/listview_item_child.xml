@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textSize="20sp"
-        android:background="#66004433"
+        android:background="#88004433"
         android:text="省份" />
 
 </LinearLayout>

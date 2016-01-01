@@ -15,7 +15,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/listview"
-    android:background="#88004433"
+    android:background="#22004433"
     />
 
 </LinearLayout>

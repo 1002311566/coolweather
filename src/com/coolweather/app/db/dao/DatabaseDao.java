@@ -60,6 +60,7 @@ public class DatabaseDao {
 		//将所有城市数据添加进去
 		for(City city:datas){
 			values.put("Province_cn", city.getProvince_cn());
+			values.put("district_cn", city.getDistrict_cn());
 			values.put("City_id", city.getCity_id());
 			values.put("City_name_cn", city.getCity_name_cn());
 			values.put("City_name_en", city.getCity_name_en());
@@ -90,11 +91,17 @@ public class DatabaseDao {
 	/**
 	 * 查询城市,根据省份名查询所有城市
 	 */
-	public Cursor queryCity(String province_name){
+	public List<String> queryCity(String province_name){
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
-		Cursor cursor = db.query(Constant.TABLE_CITY, new String[]{"City_name_cn"}, "province_name =?", new String[]{province_name}	, null, null, null);
+		Cursor cursor = db.rawQuery("select city_name_cn from City where province_cn=? ", new String[]{province_name});
+		List<String> list = new ArrayList<String>();
+		while(cursor.moveToNext()){
+			String cityName = cursor.getColumnName(cursor.getColumnIndex("city_name_cn"));
+			list.add(cityName);
+		}
 		db.close();
-		return cursor;
+		cursor.close();
+		return list;
 	}
 	
 }
