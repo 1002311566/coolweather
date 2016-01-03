@@ -1,5 +1,10 @@
 package com.coolweather.app.interfaces;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import com.coolweather.app.R;
+
 public interface Constant {
 	int DATABASE_VERSION = 1;
 	String TABLE_PROVINCE = "Province";
@@ -15,5 +20,6 @@ public interface Constant {
 	int SECOND_DAY = 2;
 	int THIRD_DAY = 3;
 	int FOURTH_DAY = 4;
+	
 
 }

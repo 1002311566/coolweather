@@ -23,6 +23,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:gravity="center_vertical"
                 android:orientation="horizontal" >
 
                 <TextView
@@ -30,13 +31,18 @@
                     android:layout_height="wrap_content"
                     android:text="天气情况：" />
 
-                <TextView
+                <View 
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"/>
+                <ImageView
                     android:id="@+id/type"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:background="#44550000"
-                    android:text="----" />
+                    android:layout_marginRight="6dp"
+                    android:background="@drawable/icon99"
+                     />
             </LinearLayout>
 
             <LinearLayout
@@ -48,6 +54,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal" >
 
                     <TextView
@@ -67,6 +74,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal" >
 
                     <TextView
@@ -87,6 +95,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:gravity="center_vertical"
                 android:orientation="horizontal" >
 
                 <TextView
@@ -106,6 +115,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:gravity="center_vertical"
                 android:orientation="horizontal" >
 
                 <TextView
@@ -125,6 +135,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:gravity="center_vertical"
                 android:orientation="horizontal" >
 
                 <TextView
@@ -144,6 +155,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:gravity="center_vertical"
                 android:orientation="horizontal" >
 
                 <TextView
@@ -163,6 +175,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:gravity="center_vertical"
                 android:orientation="horizontal" >
 
                 <TextView

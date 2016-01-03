@@ -31,6 +31,10 @@
             android:label="天气信息"
             android:launchMode="singleTop" >
         </activity>
+        <activity
+            android:name="com.coolweather.app.SplashActivity"
+            android:label="@string/title_activity_splash" >
+        </activity>
     </application>
 
 </manifest>

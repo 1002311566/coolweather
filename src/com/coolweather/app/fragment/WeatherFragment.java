@@ -3,6 +3,7 @@ package com.coolweather.app.fragment;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -10,6 +11,7 @@ import com.coolweather.app.R;
 import com.coolweather.app.activity.WeatherActivity;
 import com.coolweather.app.base.BaseFragment;
 import com.coolweather.app.interfaces.Constant;
+import com.coolweather.app.interfaces.IconCollection;
 import com.coolweather.app.model.WeatherForecastInfo;
 import com.coolweather.app.model.WeatherInfo;
 
@@ -25,7 +27,7 @@ public abstract class WeatherFragment extends BaseFragment {
 	private TextView fengli;
 	private TextView hightemp;
 	private TextView lowtemp;
-	private TextView type;
+	private ImageView type;
 
 	private LinearLayout todayInfoLy;
 	private LinearLayout todayInfo1;
@@ -56,7 +58,7 @@ public abstract class WeatherFragment extends BaseFragment {
 		fengli = (TextView) rootView.findViewById(R.id.fengli);
 		hightemp = (TextView) rootView.findViewById(R.id.hightemp);
 		lowtemp = (TextView) rootView.findViewById(R.id.lowtemp);
-		type = (TextView) rootView.findViewById(R.id.type);
+		type = (ImageView) rootView.findViewById(R.id.type);
 		todayInfoLy = (LinearLayout) rootView.findViewById(R.id.todayinfo);
 		todayInfo1 = (LinearLayout) rootView.findViewById(R.id.today_info1);
 		today_index3_chuanyi = (TextView) rootView.findViewById(R.id.today_index3_chuanyi);
@@ -110,7 +112,7 @@ public abstract class WeatherFragment extends BaseFragment {
 			fengli.setText(s[5]);
 			hightemp.setText(s[6]);
 			lowtemp.setText(s[7]);
-			type.setText(s[8]);
+			type.setBackgroundResource((IconCollection.iconMap.get(s[8])));
 			// 以下设置生活指数
 			today_index3_chuanyi.setText(s[9]);
 			today_index3_ganmao.setText(s[10]);
@@ -136,7 +138,7 @@ public abstract class WeatherFragment extends BaseFragment {
 			fengli.setText(s1[3]);
 			hightemp.setText(s1[4]);
 			lowtemp.setText(s1[5]);
-			type.setText(s1[6]);
+			type.setBackgroundResource(IconCollection.iconMap.get(s1[6]));
 
 			break;
 		case Constant.SECOND_DAY:// 设置未来第二天天气
@@ -155,7 +157,7 @@ public abstract class WeatherFragment extends BaseFragment {
 			fengli.setText(s2[3]);
 			hightemp.setText(s2[4]);
 			lowtemp.setText(s2[5]);
-			type.setText(s2[6]);
+			type.setBackgroundResource(IconCollection.iconMap.get(s2[6]));
 
 			break;
 		case Constant.THIRD_DAY:// 设置未来第三天天气
@@ -174,7 +176,7 @@ public abstract class WeatherFragment extends BaseFragment {
 			fengli.setText(s3[3]);
 			hightemp.setText(s3[4]);
 			lowtemp.setText(s3[5]);
-			type.setText(s3[6]);
+			type.setBackgroundResource(IconCollection.iconMap.get(s3[6]));
 
 			break;
 		case Constant.FOURTH_DAY:// 设置未来第四天天气
@@ -193,7 +195,7 @@ public abstract class WeatherFragment extends BaseFragment {
 			fengli.setText(s4[3]);
 			hightemp.setText(s4[4]);
 			lowtemp.setText(s4[5]);
-			type.setText(s4[6]);
+			type.setBackgroundResource(IconCollection.iconMap.get(s4[6]));
 
 			break;
 		default:
