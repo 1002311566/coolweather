@@ -1,19 +1,15 @@
 package com.coolweather.app.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.TextView;
 
 import com.coolweather.app.R;
 import com.coolweather.app.fragment.FragmentFactory;
-import com.coolweather.app.model.WeatherInfo;
 
 public class WeatherActivity extends FragmentActivity {
 	

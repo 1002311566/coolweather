@@ -1,5 +1,6 @@
 package com.coolweather.app.activity;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,12 +16,13 @@ import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.ExpandableListView.OnGroupExpandListener;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.coolweather.app.R;
 import com.coolweather.app.db.dao.DatabaseDao;
-import com.coolweather.app.model.WeatherInfo;
+import com.coolweather.app.model.WeatherForecastInfo;
 import com.coolweather.app.util.GetCityUtil;
 import com.coolweather.app.util.GetWeatherUtil;
 import com.coolweather.app.util.GlobalUtil;
@@ -28,13 +30,13 @@ import com.coolweather.app.util.LogUtils;
 
 public class MyActivity extends Activity {
 
-	
+	private LinearLayout mLoad;//加载进度条
 	private TextView mTitle;//标题
 	private ExpandableListView mListView;//叠加ListView
 
 	private List<String> mProvinceList;//存放省份名
-//	private List<String> mCityList;//存放城市名
-	private Map<String,List<String>> mAllCityMap;//存放所有城市
+	private Map<String,List<String>> mCityNameMap;
+	private Map<String,Map<String,String>> mAllCityMap;//存放所有省份和城市对应关系
 	private MyAdapter myAdatper;
 
 	@Override
@@ -46,18 +48,27 @@ public class MyActivity extends Activity {
 	}
 
 	private void initView() {
+		mLoad = (LinearLayout) findViewById(R.id.loading);
 		mTitle = (TextView) findViewById(R.id.title);
 		mListView = (ExpandableListView) findViewById(R.id.listview);
+		
+		mLoad.setVisibility(View.VISIBLE);
+		mListView.setEnabled(false);
 		initProvinceData();//初始化省份数据
 		new Thread(new Runnable() {
 			
 			@Override
 			public void run() {
 				//获取所有城市
-				mAllCityMap = new LinkedHashMap<String, List<String>>();
+				mAllCityMap = new LinkedHashMap<String, Map<String,String>>();
+				mCityNameMap = new LinkedHashMap<String, List<String>>();
 				for (String province_name : mProvinceList) {
-					List<String> mCityList = GetCityUtil.getCityData(province_name);//获取城市城市数据
-					mAllCityMap.put(province_name, mCityList);//将对应城市添加到对应省份
+					Map<String,String> cityMap = GetCityUtil.getCityData(province_name);//获取城市城市数据
+					//将省份和相对的城市装入Map集合
+					ArrayList<String> cityNameList = new ArrayList<String>(cityMap.keySet());
+					mCityNameMap.put(province_name, cityNameList);
+					//将对应城市添加到对应省份
+					mAllCityMap.put(province_name, cityMap);
 				}
 				/**
 				 * 更新UI
@@ -67,6 +78,8 @@ public class MyActivity extends Activity {
 					@Override
 					public void run() {
 						myAdatper.notifyDataSetChanged();
+						mLoad.setVisibility(View.GONE);
+						mListView.setEnabled(true);
 					}
 				});
 			}
@@ -95,20 +108,35 @@ public class MyActivity extends Activity {
 			@Override
 			public boolean onChildClick(ExpandableListView parent, View v,
 					int groupPosition, int childPosition, long id) {
-				final String cityname = mAllCityMap.get(mProvinceList.get(groupPosition)).get(childPosition);
+				//取出map集合中的键装入list集合
+				ArrayList<String> list = new ArrayList<String>(mAllCityMap.get(mProvinceList.get(groupPosition)).keySet());
+				final String cityname = list.get(childPosition);
+				final String cityid = mAllCityMap.get(mProvinceList.get(groupPosition)).get(cityname);
 				Toast.makeText(GlobalUtil.getContext(),cityname, 0).show();
 				mTitle.setText(cityname);
-				
+				mLoad.setVisibility(View.VISIBLE);
+				mListView.setEnabled(false);
 				//网络加载天气数据，耗时操作，开启子线程
 				new Thread(new Runnable() {
 					
 					@Override
 					public void run() {
-						WeatherInfo weatherInfo = GetWeatherUtil.requestCityWeather(cityname);
-						LogUtils.d("myweather", weatherInfo.toString());
+						
+						
+						
+						WeatherForecastInfo weatherFroecastInfo = GetWeatherUtil.requestCityWeatherForecast(cityname, cityid);;
 						Intent intent = new Intent(MyActivity.this,WeatherActivity.class);
-						intent.putExtra("WEATHER", weatherInfo);
+						intent.putExtra("weatherFroecastInfo", weatherFroecastInfo);
 						startActivity(intent);
+						
+						MyActivity.this.runOnUiThread(new Runnable() {
+							
+							@Override
+							public void run() {
+								mLoad.setVisibility(View.GONE);
+								mListView.setEnabled(true);
+							}
+						});
 					}
 				}).start();
 				
@@ -158,9 +186,8 @@ public class MyActivity extends Activity {
 
 		@Override
 		public int getChildrenCount(int groupPosition) {
-//			return mList.get(mProvinceList.get(groupPosition)).size();
-			int citySize = mAllCityMap.get(mProvinceList.get(groupPosition)).size();
-			return citySize;
+			//子类长度
+			return mCityNameMap.get(mProvinceList.get(groupPosition)).size();
 		}
 
 		@Override
@@ -170,8 +197,8 @@ public class MyActivity extends Activity {
 
 		@Override
 		public String getChild(int groupPosition, int childPosition) {
-//			return mList.get(mProvinceList.get(groupPosition)).get(childPosition);
-			String cityName = mAllCityMap.get(mProvinceList.get(groupPosition)).get(childPosition);
+			//子类城市名
+			String cityName = mCityNameMap.get(mProvinceList.get(groupPosition)).get(childPosition);
 			return cityName;
 		}
 
@@ -225,7 +252,7 @@ public class MyActivity extends Activity {
 				view = convertView;
 				childHolder = (ChildViewHolder) convertView.getTag();
 			}
-			String cityName = mAllCityMap.get(mProvinceList.get(groupPosition)).get(childPosition);
+			String cityName = mCityNameMap.get(mProvinceList.get(groupPosition)).get(childPosition);
 			childHolder.childTv.setText(cityName);
 			return view;
 		}

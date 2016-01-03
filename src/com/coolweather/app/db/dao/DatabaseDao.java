@@ -1,12 +1,13 @@
 package com.coolweather.app.db.dao;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.coolweather.app.db.DatabaseHelper;
 import com.coolweather.app.interfaces.Constant;
@@ -94,17 +95,18 @@ public class DatabaseDao {
 	/**
 	 * 查询城市,根据省份名查询所有城市
 	 */
-	public List<String> queryCity(String province_name){
+	public Map<String,String> queryCity(String province_name){
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
-		Cursor cursor = db.rawQuery("select city_name_cn from City where province_cn=? ", new String[]{province_name});
-		List<String> list = new ArrayList<String>();
+		Cursor cursor = db.rawQuery("select city_name_cn,city_id from City where province_cn=? ", new String[]{province_name});
+		Map<String,String> map = new LinkedHashMap<String, String>();
 		while(cursor.moveToNext()){
 			String cityName = cursor.getString(cursor.getColumnIndex("city_name_cn"));
-			list.add(cityName);
+			String cityId = cursor.getString(cursor.getColumnIndex("city_id"));
+			map.put(cityName, cityId);
 		}
 		db.close();
 		cursor.close();
-		return list;
+		return map;
 	}
 	
 }
