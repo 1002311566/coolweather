@@ -97,6 +97,7 @@ public abstract class WeatherFragment extends BaseFragment {
 			// 保存默认城市
 			SPUtil.saveConfig(SPUtil.MY_CITY, cityInfo_name);
 			SPUtil.saveConfig(SPUtil.MY_CITY_ID, cityInfo_id);
+			default_city.setText(cityInfo_name);
 
 		}
 
