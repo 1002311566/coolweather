@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
@@ -44,8 +45,7 @@ public class HttpUtil {
 			reader.close();
 			result = stringBuffer.toString();
 		} catch (Exception e) {
-			MyActivity activity = (MyActivity) GlobalUtil.getContext();
-			activity.runOnUiThread(new Runnable() {
+			((Activity) GlobalUtil.getContext()).runOnUiThread(new Runnable() {
 				
 				@Override
 				public void run() {

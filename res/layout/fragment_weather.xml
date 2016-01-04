@@ -11,9 +11,9 @@
         layout="@layout/weatherinfo_title" />
 
     <ScrollView
-        android:scrollbars="none"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:scrollbars="none" >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -31,18 +31,18 @@
                     android:layout_height="wrap_content"
                     android:text="天气情况：" />
 
-                <View 
-                    android:layout_weight="1"
+                <View
                     android:layout_width="0dp"
-                    android:layout_height="1dp"/>
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
+
                 <ImageView
                     android:id="@+id/type"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="6dp"
-                    android:background="@drawable/icon99"
-                     />
+                    android:background="@drawable/icon99" />
             </LinearLayout>
 
             <LinearLayout
@@ -223,8 +223,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:gravity="center_vertical"
                         android:background="#44550000"
+                        android:gravity="center_vertical"
                         android:text="----"
                         android:textSize="10sp" />
                 </LinearLayout>
@@ -250,6 +250,7 @@
                         android:text="----"
                         android:textSize="10sp" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
@@ -271,6 +272,7 @@
                         android:text="----"
                         android:textSize="10sp" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
@@ -292,6 +294,7 @@
                         android:text="----"
                         android:textSize="10sp" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
@@ -313,6 +316,7 @@
                         android:text="----"
                         android:textSize="10sp" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
@@ -333,6 +337,40 @@
                         android:gravity="center_vertical"
                         android:text="----"
                         android:textSize="10sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/default_bg"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_marginLeft="2dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="当前默认：" />
+
+                    <TextView
+                        android:id="@+id/default_city"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/save_cityinfo"
+                        android:layout_width="65dp"
+                        android:layout_height="45dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/select_splash"
+                        android:gravity="center"
+                        android:text="设为默认"
+                        android:textSize="15sp" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

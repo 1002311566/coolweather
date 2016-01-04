@@ -1,8 +1,10 @@
 package com.coolweather.app.fragment;
 
+import java.io.Serializable;
+
 import android.content.Intent;
-import android.text.TextUtils;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -13,7 +15,8 @@ import com.coolweather.app.base.BaseFragment;
 import com.coolweather.app.interfaces.Constant;
 import com.coolweather.app.interfaces.IconCollection;
 import com.coolweather.app.model.WeatherForecastInfo;
-import com.coolweather.app.model.WeatherInfo;
+import com.coolweather.app.util.GetWeatherUtil;
+import com.coolweather.app.util.SPUtil;
 
 public abstract class WeatherFragment extends BaseFragment {
 
@@ -31,15 +34,21 @@ public abstract class WeatherFragment extends BaseFragment {
 
 	private LinearLayout todayInfoLy;
 	private LinearLayout todayInfo1;
-	private TextView today_index3_chuanyi;//穿衣指数
+	private TextView today_index3_chuanyi;// 穿衣指数
 	private TextView today_index3_fangshai;
 	private TextView today_index3_ganmao;
 	private TextView today_index3_yundong;
 	private TextView today_index3_liangshai;
 	private TextView today_index3_xiche;
-	
+	private WeatherForecastInfo weatherFroecastInfo;
 
-	// private String cityName;
+	private TextView saveCity;
+
+	private String cityInfo_name;
+	private String cityInfo_id;
+	
+	private TextView default_city;
+
 	/*
 	 * 从子类中获取到位置标记
 	 */
@@ -61,28 +70,51 @@ public abstract class WeatherFragment extends BaseFragment {
 		type = (ImageView) rootView.findViewById(R.id.type);
 		todayInfoLy = (LinearLayout) rootView.findViewById(R.id.todayinfo);
 		todayInfo1 = (LinearLayout) rootView.findViewById(R.id.today_info1);
-		today_index3_chuanyi = (TextView) rootView.findViewById(R.id.today_index3_chuanyi);
-		today_index3_xiche = (TextView) rootView.findViewById(R.id.today_index3_xiche);
-		today_index3_fangshai = (TextView) rootView.findViewById(R.id.today_index3_fangshai);
-		today_index3_liangshai = (TextView) rootView.findViewById(R.id.today_index3_liangshai);
-		today_index3_yundong = (TextView) rootView.findViewById(R.id.today_index3_yundong);
-		today_index3_ganmao = (TextView) rootView.findViewById(R.id.today_index3_ganmao);
-	
+		today_index3_chuanyi = (TextView) rootView
+				.findViewById(R.id.today_index3_chuanyi);
+		today_index3_xiche = (TextView) rootView
+				.findViewById(R.id.today_index3_xiche);
+		today_index3_fangshai = (TextView) rootView
+				.findViewById(R.id.today_index3_fangshai);
+		today_index3_liangshai = (TextView) rootView
+				.findViewById(R.id.today_index3_liangshai);
+		today_index3_yundong = (TextView) rootView
+				.findViewById(R.id.today_index3_yundong);
+		today_index3_ganmao = (TextView) rootView
+				.findViewById(R.id.today_index3_ganmao);
+
+		saveCity = (TextView) rootView.findViewById(R.id.save_cityinfo);
+		saveCity.setOnClickListener(new MyListener());
 		
-	
+		default_city = (TextView) rootView.findViewById(R.id.default_city);
+	}
+
+	private class MyListener implements OnClickListener {
+
+		@Override
+		public void onClick(View v) {
+
+			// 保存默认城市
+			SPUtil.saveConfig(SPUtil.MY_CITY, cityInfo_name);
+			SPUtil.saveConfig(SPUtil.MY_CITY_ID, cityInfo_id);
+
+		}
+
 	}
 
 	@Override
 	public void initData() {
+		
+		default_city.setText(SPUtil.getString(SPUtil.MY_CITY));
+
 		WeatherActivity activity = (WeatherActivity) getActivity();
 		Intent intent = activity.getIntent();
-		WeatherForecastInfo weatherFroecastInfo = (WeatherForecastInfo) intent
-				.getSerializableExtra("weatherFroecastInfo");
-		// 根据位置标记设置相应数据
+		weatherFroecastInfo = (WeatherForecastInfo) intent.getSerializableExtra("weatherFroecastInfo");
+
 		int flag = setPositionFlag();
 		// 设置共有数据
-		city.setText(weatherFroecastInfo.getCity());// 设置城市名
-		cityid.setText(weatherFroecastInfo.getCityId());// 设置城市id
+		city.setText(cityInfo_name = weatherFroecastInfo.getCity());// 设置城市名
+		cityid.setText(cityInfo_id = weatherFroecastInfo.getCityId());// 设置城市id
 		switch (flag) {
 		case Constant.NOW_DAY:// 设置当天天气
 			// 显示生活指数项
@@ -102,12 +134,11 @@ public abstract class WeatherFragment extends BaseFragment {
 					weatherFroecastInfo.getToday_index_2_details(),
 					weatherFroecastInfo.getToday_index_4_details(),
 					weatherFroecastInfo.getToday_index_5_details(),
-					weatherFroecastInfo.getToday_index_6_details(),
-					};
+					weatherFroecastInfo.getToday_index_6_details(), };
 			date.setText(s[0]);
 			week.setText(s[1]);
 			curTemp.setText(s[2]);
-			aqi.setText(s[3].equals("null")?"----":s[3]);
+			aqi.setText(s[3].equals("null") ? "----" : s[3]);
 			fengxiang.setText(s[4]);
 			fengli.setText(s[5]);
 			hightemp.setText(s[6]);
@@ -203,6 +234,7 @@ public abstract class WeatherFragment extends BaseFragment {
 			break;
 
 		}
+
 	}
 
 	@Override

@@ -42,6 +42,7 @@ public abstract class BaseFragment extends Fragment {
 			WeatherActivity activity = (WeatherActivity) getActivity();
 			Intent intent = new Intent(activity,MyActivity.class);
 			activity.startActivity(intent);
+			activity.finish();
 		}
 		
 	}

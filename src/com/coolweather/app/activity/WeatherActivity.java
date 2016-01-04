@@ -10,6 +10,9 @@ import android.view.Window;
 
 import com.coolweather.app.R;
 import com.coolweather.app.fragment.FragmentFactory;
+import com.coolweather.app.model.WeatherForecastInfo;
+import com.coolweather.app.util.GetWeatherUtil;
+import com.coolweather.app.util.SPUtil;
 
 public class WeatherActivity extends FragmentActivity {
 	
@@ -51,7 +54,12 @@ public class WeatherActivity extends FragmentActivity {
 
 	private void init() {
 		viewPager = (ViewPager) findViewById(R.id.viewpager);
-	
 	}
 
+	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		SPUtil.saveConfig(SPUtil.AUTOGET_FLAG, true);
+	}
 }
