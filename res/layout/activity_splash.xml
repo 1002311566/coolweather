@@ -20,7 +20,7 @@
             android:visibility="gone"
             android:background="@drawable/select_splash"
             android:gravity="center"
-            android:text="设置默认城市"
+            android:text="@string/set_normal_city"
              />
     </RelativeLayout>
 
@@ -36,7 +36,8 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="42dp"
-            android:text="数据初始化..." />
+            android:text="@string/init_data" 
+            />
 
         <ProgressBar
             android:id="@+id/progressBar1"

@@ -45,10 +45,7 @@ public class HttpUtil {
 			reader.close();
 			result = stringBuffer.toString();
 		} catch (Exception e) {
-			((Activity) GlobalUtil.getContext()).runOnUiThread(new Runnable() {
 				
-				@Override
-				public void run() {
 					Builder builder = new AlertDialog.Builder(GlobalUtil.getContext());
 					builder.setTitle("错误").setIcon(R.drawable.net_errer).setMessage("加载失败").setCancelable(false).setPositiveButton("返回", new OnClickListener() {
 						
@@ -56,8 +53,6 @@ public class HttpUtil {
 						public void onClick(DialogInterface dialog, int which) {
 						}
 					}).create().show();
-				}
-			});
 			e.printStackTrace();
 		}
 		

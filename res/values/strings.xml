@@ -6,5 +6,26 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_weather">WeatherActivity</string>
     <string name="title_activity_splash">SplashActivity</string>
+    <string name="set_normal_city">设置默认城市</string>
+    <string name="init_data">数据初始化...</string>
+    <string name="weather_type">天气情况：</string>
+    <string name="tair">气温：</string>
+    <string name="____">----</string>
+    <string name="aqi">空气质量指数：</string>
+    <string name="fengxiang">风向：</string>
+    <string name="fengli">风力：</string>
+    <string name="hightemp">最高气温：</string>
+    <string name="lowtemp">最低气温：</string>
+    <string name="city_code">城市编码：</string>
+    <string name="life_index">生活指数</string>
+    <string name="chuanyi">穿衣指数：</string>
+    <string name="ganmao">感冒指数：</string>
+    <string name="yundong">运动指数：</string>
+    <string name="fangshai">防晒指数：</string>
+    <string name="liangshai">晾晒指数：</string>
+    <string name="xiche">洗车指数：</string>
+    <string name="now_default">当前默认：</string>
+    <string name="set_default">设为默认</string>
+    <string name="no_info">----</string>
 
 </resources>

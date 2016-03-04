@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/weather_bg1"
     android:orientation="vertical" >
 
     <include
@@ -29,7 +30,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="天气情况：" />
+                    android:text="@string/weather_type" 
+                    />
 
                 <View
                     android:layout_width="0dp"
@@ -42,8 +44,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="6dp"
-                    android:background="@drawable/icon99" />
+                    android:background="@drawable/icon99" 
+                    />
             </LinearLayout>
+            
+          
 
             <LinearLayout
                 android:id="@+id/today_info1"
@@ -53,22 +58,30 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:orientation="horizontal" >
+                    android:orientation="vertical" >
+                    <LinearLayout 
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="气温：" />
+                        android:layout_marginLeft="5dp"
+                        android:text="@string/tair" 
+                        />
 
                     <TextView
                         android:id="@+id/curtemp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
                         android:background="#44550000"
-                        android:text="----" />
+                        android:text="@string/no_info" 
+                        />
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
@@ -80,7 +93,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="空气质量指数：" />
+                        android:text="@string/aqi" 
+                        />
 
                     <TextView
                         android:id="@+id/api"
@@ -88,7 +102,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:background="#44550000"
-                        android:text="----" />
+                        android:text="@string/no_info" 
+                        />
                 </LinearLayout>
             </LinearLayout>
 
@@ -101,7 +116,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="风向：" />
+                    android:text="@string/fengxiang" 
+                    />
 
                 <TextView
                     android:id="@+id/fengxiang"
@@ -109,7 +125,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:background="#44550000"
-                    android:text="----" />
+                    android:text="@string/no_info" 
+                    />
             </LinearLayout>
 
             <LinearLayout
@@ -121,7 +138,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="风力：" />
+                    android:text="@string/fengli" 
+                    />
 
                 <TextView
                     android:id="@+id/fengli"
@@ -129,8 +147,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:background="#44550000"
-                    android:text="----" />
+                    android:text="@string/no_info" 
+                    />
             </LinearLayout>
+           
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -141,7 +161,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="最高气温：" />
+                    android:text="@string/hightemp" 
+                    />
 
                 <TextView
                     android:id="@+id/hightemp"
@@ -149,8 +170,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:background="#44550000"
-                    android:text="----" />
+                    android:text="@string/no_info" 
+                    />
             </LinearLayout>
+          
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -161,7 +184,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="最低气温：" />
+                    android:text="@string/lowtemp" 
+                    />
 
                 <TextView
                     android:id="@+id/lowtemp"
@@ -169,8 +193,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:background="#44550000"
-                    android:text="----" />
+                    android:text="@string/no_info" 
+                    />
             </LinearLayout>
+          
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -181,7 +207,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="城市编码：" />
+                    android:text="@string/city_code" 
+                    />
 
                 <TextView
                     android:id="@+id/cityid"
@@ -189,8 +216,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:background="#44550000"
-                    android:text="----" />
+                    android:text="@string/no_info" 
+                    />
             </LinearLayout>
+            
 
             <LinearLayout
                 android:id="@+id/todayinfo"
@@ -203,9 +232,11 @@
                     android:layout_height="30dp"
                     android:background="#22222222"
                     android:gravity="center"
-                    android:text="生活指数"
+                    android:text="@string/life_index"
                     android:textColor="#ff448811"
+                    android:layout_marginBottom="10dp"
                     android:textSize="20sp" />
+                
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -216,7 +247,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="穿衣指数：" />
+                        android:text="@string/chuanyi" />
 
                     <TextView
                         android:id="@+id/today_index3_chuanyi"
@@ -225,20 +256,26 @@
                         android:layout_marginLeft="5dp"
                         android:background="#44550000"
                         android:gravity="center_vertical"
-                        android:text="----"
-                        android:textSize="10sp" />
+                        android:text="@string/no_info"
+                        />
                 </LinearLayout>
+                <View 
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_margin="4dp"
+                    android:background="#99ff0000"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:orientation="horizontal" >
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="感冒指数：" />
+                        android:text="@string/ganmao" 
+                        />
 
                     <TextView
                         android:id="@+id/today_index3_ganmao"
@@ -247,20 +284,26 @@
                         android:layout_marginLeft="5dp"
                         android:background="#44550000"
                         android:gravity="center_vertical"
-                        android:text="----"
-                        android:textSize="10sp" />
+                        android:text="@string/no_info"
+                        />
                 </LinearLayout>
+                <View 
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_margin="4dp"
+                    android:background="#99ff0000"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:orientation="horizontal" >
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="运动指数：" />
+                        android:text="@string/yundong" 
+                        />
 
                     <TextView
                         android:id="@+id/today_index3_yundong"
@@ -269,20 +312,26 @@
                         android:layout_marginLeft="5dp"
                         android:background="#44550000"
                         android:gravity="center_vertical"
-                        android:text="----"
-                        android:textSize="10sp" />
+                        android:text="@string/no_info"
+                        />
                 </LinearLayout>
+                <View 
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_margin="4dp"
+                    android:background="#99ff0000"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:orientation="horizontal" >
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="防晒指数：" />
+                        android:text="@string/fangshai" 
+                        />
 
                     <TextView
                         android:id="@+id/today_index3_fangshai"
@@ -291,20 +340,26 @@
                         android:layout_marginLeft="5dp"
                         android:background="#44550000"
                         android:gravity="center_vertical"
-                        android:text="----"
-                        android:textSize="10sp" />
+                        android:text="@string/no_info"
+                        />
                 </LinearLayout>
+                <View 
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_margin="4dp"
+                    android:background="#99ff0000"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:orientation="horizontal" >
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="晾晒指数：" />
+                        android:text="@string/liangshai" 
+                        />
 
                     <TextView
                         android:id="@+id/today_index3_liangshai"
@@ -313,20 +368,26 @@
                         android:layout_marginLeft="5dp"
                         android:background="#44550000"
                         android:gravity="center_vertical"
-                        android:text="----"
-                        android:textSize="10sp" />
+                        android:text="@string/no_info"
+                        />
                 </LinearLayout>
+                <View 
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_margin="4dp"
+                    android:background="#99ff0000"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:orientation="horizontal" >
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="洗车指数：" />
+                        android:text="@string/xiche" 
+                        />
 
                     <TextView
                         android:id="@+id/today_index3_xiche"
@@ -335,9 +396,14 @@
                         android:layout_marginLeft="5dp"
                         android:background="#44550000"
                         android:gravity="center_vertical"
-                        android:text="----"
-                        android:textSize="10sp" />
+                        android:text="@string/no_info"
+                        />
                 </LinearLayout>
+                <View 
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_margin="4dp"
+                    android:background="#99ff0000"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -349,13 +415,15 @@
                         android:layout_marginLeft="2dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="当前默认：" />
+                        android:text="@string/now_default" 
+                        />
 
                     <TextView
                         android:id="@+id/default_city"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="20sp" />
+                        android:textSize="20sp" 
+                        />
 
                     <View
                         android:layout_width="0dp"
@@ -369,8 +437,9 @@
                         android:layout_marginRight="10dp"
                         android:background="@drawable/select_splash"
                         android:gravity="center"
-                        android:text="设为默认"
-                        android:textSize="15sp" />
+                        android:text="@string/set_default"
+                        android:textSize="15sp" 
+                        />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

@@ -119,7 +119,9 @@ public class SplashActivity extends Activity {
 	 * 初始化省份数据
 	 */
 	private void initProvinceData() {
-		mProvinceList = DatabaseDao.getDatabaseDao().queryProvince();
+		if(mProvinceList==null){
+			mProvinceList = DatabaseDao.getDatabaseDao().queryProvince();
+		}
 	}
 	
 	@Override

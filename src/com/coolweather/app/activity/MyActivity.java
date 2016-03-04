@@ -8,6 +8,7 @@ import java.util.Map;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -51,7 +52,9 @@ public class MyActivity extends Activity {
 	private void initView() {
 		mTitle = (TextView) findViewById(R.id.title);
 		mListView = (ExpandableListView) findViewById(R.id.listview);
-		mProvinceList = DatabaseDao.getDatabaseDao().queryProvince();
+		if(mProvinceList==null){
+			mProvinceList = DatabaseDao.getDatabaseDao().queryProvince();
+		}
 		mAllCityMap = new LinkedHashMap<String, Map<String, String>>();
 		mCityNameMap = new LinkedHashMap<String, List<String>>();
 		for (String province_name : mProvinceList) {
@@ -245,6 +248,7 @@ public class MyActivity extends Activity {
 		
 
 	}
+	
 	
 	@Override
 	protected void onDestroy() {
